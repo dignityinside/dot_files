@@ -1,0 +1,18 @@
+[user]
+	email = dignityinside@protonmail.com
+	name = Alexander Schilling
+[color]
+	ui = auto
+[core]
+	autocrlf = input
+	editor = vim
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[alias]
+    tree = log --oneline --decorate --all --graph
+    mylog = log --pretty=format:%h
+[push]
+    default = current
+
