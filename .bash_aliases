@@ -1,5 +1,10 @@
-alias la="ls --color la"
+# go one folder up
+alias ..='cd ..'
 
+# colorize ls
+alias ls='ls --color=auto'
+
+# long listing and all
 alias ll='ls -la'
 
 # grep with color output
@@ -16,6 +21,56 @@ fd() { find -type d -name "*$1*"; }
 
 # show my ps
 alias myps='ps aux | grep $USER'
+
+# cancel all process, which name like argument $1
+ps_stop(){ ps -e| grep $1 | awk '{print $1}' | while read p; do kill -STOP $p; echo $p stoped; done; }
+
+# continue process, which name like argument $1
+ps_continue(){ ps -e| grep $1 | awk '{print $1}' | while read p; do kill -CONT $p; echo $p continued; done; }
+
+# extract archive by format
+extract_file() {
+  if [ $# -ne 1 ]
+  then
+    echo "Error: No file specified."
+    return 1
+  fi
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2) tar xvjf $1   ;;
+            *.tar.gz)  tar xvzf $1   ;;
+            *.bz2)     bunzip2 $1    ;;
+            *.rar)     unrar x $1    ;;
+            *.gz)      gunzip $1     ;;
+            *.tar)     tar xvf $1    ;;
+            *.tbz2)    tar xvjf $1   ;;
+            *.tgz)     tar xvzf $1   ;;
+            *.zip)     unzip $1      ;;
+            *.Z)       uncompress $1 ;;
+            *.7z)      7z x $1       ;;
+            *)         echo "'$1' cannot be extracted via extract_file." ;;
+        esac
+    else
+        echo "'$1' is not a valid archive file"
+    fi
+}
+
+# highlight keyword, example: cat .bashrc | highlight alias
+highlight () {
+  perl -pe "s/$1/\e[1;36;46m$&\e[0m/g";
+}
+
+# Alert when long running command is finish. Example: "sleep 10; alert"
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# make dir with current date (Y-m-d)
+alias mkdd='mkdir $(date +%Y-%m-%d)'
+
+# set the HOME environment variable to the home directory specified by the target user's password database entry
+alias sudo='sudo -H'
+
+# search in the history
+alias hgrep='history | grep'
 
 # open cd drive
 alias open_cd='eject /dev/sr0'
@@ -45,9 +100,6 @@ alias fix_ssh='./bin/fix-ssh'
 
 # open folder in sublime (snap)
 #alias subl='/snap/bin/sublime-text.subl'
-
-# open folder in sublime text (flatpak)
-#alias subl='/var/lib/flatpak/app/com.sublimetext.three/current/active/files/bin/sublime-text.subl'
 
 # youtube-dl (cd ~/bin && wget https://yt-dl.org/downloads/latest/youtube-dl && chmod a+x ~/bin/youtube-dl
 #alias yt='~/bin/youtube-dl'
