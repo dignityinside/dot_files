@@ -5,7 +5,7 @@
 	ui = auto
 [core]
 	autocrlf = input
-	editor = vim
+	editor = nano
 [diff]
     tool = vimdiff
 [difftool]
@@ -15,4 +15,3 @@
     mylog = log --pretty=format:%h
 [push]
     default = current
-
