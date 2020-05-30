@@ -48,7 +48,7 @@ extract_file() {
             *.zip)     unzip $1      ;;
             *.Z)       uncompress $1 ;;
             *.7z)      7z x $1       ;;
-            *)         echo "'$1' cannot be extracted via extract_file." ;;
+            *)         echo "'$1' cannot be extracted via extract" ;;
         esac
     else
         echo "'$1' is not a valid archive file"
@@ -57,11 +57,8 @@ extract_file() {
 
 # highlight keyword, example: cat .bashrc | highlight alias
 highlight () {
-  perl -pe "s/$1/\e[1;36;46m$&\e[0m/g";
+	perl -pe "s/$1/\e[1;36;46m$&\e[0m/g";
 }
-
-# Alert when long running command is finish. Example: "sleep 10; alert"
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # make dir with current date (Y-m-d)
 alias mkdd='mkdir $(date +%Y-%m-%d)'
@@ -87,15 +84,19 @@ alias dpkg_install_deps='sudo apt-get -f install'
 # remove package cache
 alias dpkg_remove_cache='sudo rm /var/lib/apt/lists/* && sudo apt update'
 
+# open folder with ppa
+alias ppa_sources='cd /etc/apt/sources.list.d/'
+
 # xampp
 #alias xampp='sudo /opt/lampp/xampp'
 #alias xampp_hosts='sudo nano /etc/hosts'
 #alias xampp_vhosts='sudo nano /opt/lampp/etc/extra/httpd-vhosts.conf'
+#alias xampp_security='sudo /opt/lampp/lampp security'
 
 # composer alias
 #alias composer='php ~/bin/composer.phar'
 
-# fix ssh folder and files permissions
+# fix ssh folders and files permissions
 alias fix_ssh='./bin/fix-ssh'
 
 # open folder in sublime (snap)
@@ -121,3 +122,12 @@ alias fix_ssh='./bin/fix-ssh'
 
 # connect to tp-link router
 #alias tplink='ssh root@192.168.1.1'
+
+# Add an "alert" alias for long running commands. Example: "sleep 10; alert"
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# changes in undone revisions are preserved
+alias undo_last_commit_soft='git reset --soft HEAD~1'
+
+# changes in undone revisions are not preserved
+alias undo_last_commit_hard='git reset --hard HEAD~1'
