@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# remove old download
+rm postman.tar.gz
+
+# download postman
+wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
+
+# extract archive
+sudo tar -xzf postman.tar.gz -C /opt
+
+# remove old symlink
+sudo rm /usr/bin/postman
+
+# make new link to /usr/bin
+sudo ln -s /opt/Postman/Postman /usr/bin/postman
+
+# remove downloaded file
+rm postman.tar.gz
+
+# create desktop shortcut
+cat > ~/.local/share/applications/postman.desktop <<EOL
+[Desktop Entry]
+Encoding=UTF-8
+Name=Postman
+Exec=postman
+Icon=/opt/Postman/app/resources/app/assets/icon.png
+Terminal=false
+Type=Application
+Categories=Development;
+EOL

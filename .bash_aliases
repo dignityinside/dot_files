@@ -84,50 +84,53 @@ alias dpkg_install_deps='sudo apt-get -f install'
 # remove package cache
 alias dpkg_remove_cache='sudo rm /var/lib/apt/lists/* && sudo apt update'
 
-# open folder with ppa
-alias ppa_sources='cd /etc/apt/sources.list.d/'
+# build docker
+alias docker_build='docker-compose build'
 
-# xampp
-#alias xampp='sudo /opt/lampp/xampp'
-#alias xampp_hosts='sudo nano /etc/hosts'
-#alias xampp_vhosts='sudo nano /opt/lampp/etc/extra/httpd-vhosts.conf'
-#alias xampp_security='sudo /opt/lampp/lampp security'
+# start docker
+alias docker_up='docker-compose up -d'
 
-# composer alias
-#alias composer='php ~/bin/composer.phar'
+# stop docker
+alias docker_down='docker-compose down'
+
+# enter docker
+alias docker_ssh='docker-compose exec php /bin/bash'
+
+# stop all docker container
+alias docker_stop='docker stop $(docker ps -aq)'
+
+# remove all docker container
+alias docker_fresh='docker system prune --volumes -af'
+
+# show docker logs
+alias docker_log='docker-compose logs -f'
 
 # fix ssh folders and files permissions
 alias fix_ssh='./bin/fix-ssh'
 
-# open folder in sublime (snap)
-#alias subl='/snap/bin/sublime-text.subl'
-
 # youtube-dl (cd ~/bin && wget https://yt-dl.org/downloads/latest/youtube-dl && chmod a+x ~/bin/youtube-dl
-#alias yt='~/bin/youtube-dl'
+alias yt='~/bin/youtube-dl'
 
 # update youtube-dl
-#alias yt_update='yt -U'
+alias yt_update='yt -U'
 
 # download only mp3 from an youtube video
-#alias yt_mp3='yt --extract-audio --audio-format mp3'
+alias yt_mp3='youtube-dl --extract-audio --audio-format mp3'
 
 # make file system check on kindle device
-#alias fix_kindle='sudo fsck.vfat -r /dev/sdc1'
-
-# download server backups to current folder
-#alias download_server_backups='scp -r root@xxx:/root/backups .'
-
-# connect to the server
-#alias aptenodytes='ssh root@xxx'
-
-# connect to tp-link router
-#alias tplink='ssh root@192.168.1.1'
-
-# Add an "alert" alias for long running commands. Example: "sleep 10; alert"
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias fix_kindle='sudo fsck.vfat -r /dev/sdc1'
 
 # changes in undone revisions are preserved
 alias undo_last_commit_soft='git reset --soft HEAD~1'
 
 # changes in undone revisions are not preserved
 alias undo_last_commit_hard='git reset --hard HEAD~1'
+
+# open folder with ppa
+alias ppa_sources='cd /etc/apt/sources.list.d/'
+
+# cd to code folder
+alias code="cd ~/Code"
+
+# run python3 as python
+alias python=python3
