@@ -1,0 +1,14 @@
+{
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.run": "onSave",
+  "editor.tabSize": 2,
+  "editor.fontSize": 12,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": false,
+  "editor.tabCompletion": "onlySnippets",
+  "window.zoomLevel": 2,
+  "emmet.triggerExpansionOnTab": true
+}
